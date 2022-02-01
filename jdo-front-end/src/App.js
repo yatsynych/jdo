@@ -14,9 +14,11 @@ function App() {
 */
     const [todos, setTodos] = useState([])
     const [loading, setLoading] = useState(true)
+    const url1 = 'http://localhost:4000/todo/'
+    const url2 = 'https://jsonplaceholder.typicode.com/todos?_limit=5'
 
     useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
+        fetch(url1)
             .then(response => response.json())
             .then(todos => {
                 setTimeout(() => {
