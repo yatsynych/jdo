@@ -1,0 +1,7 @@
+{
+    "port": 4000,
+    "jwtSecret": "EJUs3VM968Ce4eDgaAbFmeQvuL72PCAcvZY6gHAR",
+    "mongodb" : {
+        "uri" : "mongodb://127.0.0.1:27017/jdo"
+    }
+}

@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import TodoList from './todo/TodoList';
 import Context from './context';
 import AddTodo from './todo/AddTodo';
+import AuthPage from './pages/AuthPage'
 import Loader from './Loader';
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
     const [todos, setTodos] = useState([])
     const [loading, setLoading] = useState(true)
     const url1 = 'http://localhost:4000/todo/'
-    const url2 = 'https://jsonplaceholder.typicode.com/todos?_limit=5'
+    // const url2 = 'https://jsonplaceholder.typicode.com/todos?_limit=5'
 
     useEffect(() => {
         fetch(url1)
@@ -59,6 +60,7 @@ function App() {
     }
 
     return (
+        /*
         <Context.Provider value={{removeTodo}}>
             <div className="wrapper">
                 <h1>jDO</h1>
@@ -71,6 +73,10 @@ function App() {
                 )}
             </div>
         </Context.Provider>
+        */
+        
+        <AuthPage />
+       
     );
 }
 
