@@ -1,34 +1,27 @@
 import React from "react"
-import {Routes, Route } from "react-router-dom"
-//import Todo from './todo/Todo'
-import {SingUp} from './pages/SignUp'
-import {SingIn} from './pages/SignIn'
+import {Routes, Route, Navigate} from "react-router-dom"
+import Todo from './components/todo/Todo'
+import SingUp from './components/auth/SignUp'
+import {SingIn} from './components/auth/SignIn'
 
-export const useRoutes = isAuthenticated => {
+export const appRoutes = isAuthenticated => {
 
-    /*
     if (isAuthenticated) {
         return (
             <Routes>
-                <Route link path="/todo" exact>
-                    <Todo />
-                </Route>
-                <Route path="/todo/create" exact>
-                    <Todo />
-                </Route>
-                <Route path="/todo/delete/:id" exact>
-                    <Todo />
-                </Route>
+                <Route path="/" element={<Todo />} exact />
+                <Route path="/todo/create"  element={<Todo />} exact />
+                <Route path="/todo/delete/:id" element={<Todo />} exact />
+                <Route path="*" element={<Navigate replace to="/" />} />
             </Routes>
         )
     }
-*/
-    console.log('Log: AuthPage')
 
     return (
         <Routes>
-            <Route path="singin" element={<SingIn />} />
-            <Route path="/" element={<SingUp />} />
+            <Route path="/" element={<SingIn />} />
+            <Route path="/auth/singup" element={<SingUp />} exact />
+            <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
     )
 }

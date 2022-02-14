@@ -7,44 +7,57 @@ const User = require('../models/User')
 const router = Router()
 
 router.post(
-    '/register',
+    '/signup',
     [
         check('email', "Incorect email").isEmail(),
         check('password', "Min lenght 6 symbols").isLength({min: 6})
     ],
-    async (rec, res) => {
-    try {
-        const errors = validationResult(req)
+    async (req, res) => {
+        try {                 
+            const errors = validationResult(req)
 
-        if (!errors.isEmpty()) {
-            return res.status(400).json({
-                errors: errors.array(),
-                message: 'Incorect registration data'
+            if (!errors.isEmpty()) {
+                return res.status(400).json({
+                    error: true,
+                    errors: errors.array(),
+                    message: 'Incorect registration data'
+                })
+            }
+
+            const {email, password} = reg.body
+
+            const candidate = await User.findOne({ email })
+
+            if (candidate) {
+                return res.status(500).json({
+                    error: true,
+                    message: "User exists"
+                })
+            }
+
+            const hashedPassword = await bcrypt.hash(password, 12)
+            const user = new User({email, password: hashedPassword })
+
+            await user.save()
+
+            res.status(201).json({
+                error: true,
+                message: "User created"
+            })
+
+        } catch(e) {
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.status(500).json({
+                error: true,
+                message: "Error. Try!"
             })
         }
-
-        const {email, password} = reg.body
-
-        const candidate = await User.findOne({ email })
-
-        if (candidate) {
-            return res.status(500).json({message: "User exists"})
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 12)
-        const user = new User({email, password: hashedPassword })
-
-        await user.save()
-
-        res.status(201).json({ message: "User created"})
-
-    } catch(e) {
-        res.status(500).json({message: "Error. Try."})
     }
-})
+
+)
 
 router.post(
-    '/login',
+    '/signin',
     [
         check('email', "Enter valid email").normalizeEmail().isEmail(),
         check('password', "Enter password").exists()

@@ -1,0 +1,15 @@
+export const SIGNUP_USER = 'AUTH/SIGNUP_USER'
+export const SIGNIN_USER = 'AUTH/SIGNIN_USER'
+
+export const CREATE_TODO = 'TODO/CREATE_TODO'
+export const FETCH_TODOS = 'TODO/FETCH_TODOS'
+export const REQUEST_TODOS = 'TODO/REQUEST_TODOS'
+
+export const CREATE_TAG = 'TAG/CREATE_TAGS'
+export const FETCH_TAGS = 'TAG/FETCH_TAGS'
+export const REQUEST_TAGS = 'TAG/REQUEST_TAGS'
+
+export const SHOW_LOADER = 'APP/SHOW_LOADER'
+export const HIDE_LOADER = 'APP/HIDE_LOADER'
+export const SHOW_ALERT = 'APP/SHOW_ALERT'
+export const HIDE_ALERT = 'APP/HIDE_ALERT'

@@ -1,67 +1,70 @@
-import * as React from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import CssBaseline from '@mui/material/CssBaseline'
 import TextField from '@mui/material/TextField'
-import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
-import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { deepOrange } from '@mui/material/colors'
+import PersonIcon from '@mui/icons-material/Person'
+import { authSignUp, showAlert } from '../../redux/actions'
+import HttpRequest from '../HttpRequest'
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://github.com/yatsynych/jdo">
-       jDO
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+class SingUp extends React.Component {
 
-const theme = createTheme();
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: '', password: '', firstName: '', lastName: ''
+    }
+  }
 
-export const SingUp = () => {
-  const handleSubmit = (event) => {
+  changeHandler = event => {
+    this.setState({ ...this.state, [event.target.name]: event.target.value })
+  }
+
+  signupHendler = event => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password')
-    });
+    // console.log('this.props', this.props)
+    this.props.authSignUp(this.state) // for test only (not work)
+
+    const request = HttpRequest('/api/auth/signup', 'POST', {...this.state})
+    console.log(request)
+
+    /*
+    const {form, dispatch} = this.props
+      try {
+        this.props.authSignUp(this.state)
+        //const data = request('/api/auth/signup', 'POST', {...form})
+      } catch (e) {
+        console.log(e)
+      }
+      */
   };
 
-  return (
-    <ThemeProvider theme={theme}>
+  render() {
+    return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
-          <Typography component="h1" variant="h2" fontWeight="bold">
-            jDO
-          </Typography>
-          <Avatar sx={{ m: 1, bgcolor: deepOrange[500] }}>
+          <Avatar sx={{ m: 1, mt : 3, bgcolor: deepOrange[500] }}>
             <PersonIcon />
           </Avatar>
-          <Typography component="h2" variant="h5">
+          <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={this.signupHendler} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -72,6 +75,7 @@ export const SingUp = () => {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={this.changeHandler}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -82,6 +86,7 @@ export const SingUp = () => {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  onChange={this.changeHandler}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -92,6 +97,7 @@ export const SingUp = () => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={this.changeHandler}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -103,6 +109,7 @@ export const SingUp = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={this.changeHandler}
                 />
               </Grid>
             </Grid>
@@ -115,17 +122,28 @@ export const SingUp = () => {
             >
               Sign Up
             </Button>
+            
             <Grid container justifyContent="center">
               <Grid item>
-                <Link href="/singin" variant="body2">
+                <Link to="/">
                   Already have an account? Sign In
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
-    </ThemeProvider>
-  );
+    )
+  }
 }
+
+const mapDispatchToProps = {
+  authSignUp,
+  showAlert,
+}
+
+const mapStateToProps = state => ({
+  alert: state.app.alert
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingUp)
