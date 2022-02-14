@@ -1,4 +1,4 @@
-import {SHOW_ALERT, HIDE_ALERT, SIGNUP_USER, SIGNIN_USER} from './actionsTypes'
+import {SHOW_ALERT, HIDE_ALERT, SIGNUP_USER, SIGNIN_USER, SHOW_LOADER, HIDE_LOADER} from './actionsTypes'
 
 export function showAlert(text) {
   return dispatch => {
@@ -16,10 +16,11 @@ export function hideAlert() {
 }
 
 export function authSignUp(form) {
-  console.log(form)
-  return {
-    type: SIGNUP_USER,
-    payload: form
+  return dispatch => {
+    dispatch({
+      type: SIGNUP_USER,
+      payload: form
+    })
   }
 }
 
@@ -32,8 +33,6 @@ export function authSignIn(form) {
 }
 
 
-/*
-
 export function showLoader() {
   return {
     type: SHOW_LOADER
@@ -45,5 +44,3 @@ export function hideLoader() {
     type: HIDE_LOADER
   }
 }
-
-*/

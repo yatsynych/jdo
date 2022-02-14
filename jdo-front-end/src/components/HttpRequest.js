@@ -22,5 +22,4 @@ export default async function HttpRequest(url, method = 'GET', body = null, head
 
     return (response, error)
 
-
 }
