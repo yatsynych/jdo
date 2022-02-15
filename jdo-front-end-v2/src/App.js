@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useSelector } from 'react'
 import {BrowserRouter} from 'react-router-dom'
 import {appRoutes} from './routes'
 import { createTheme } from '@mui/material/styles'
@@ -8,8 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
-
-const routes = appRoutes(false)
+import { ReactReduxContext } from 'react-redux'
 
 const theme = createTheme()
 
@@ -29,7 +28,16 @@ const useStyles = makeStyles({
     },
   });
 
+//const { login } = useSelector((state) => state.auth)
+//console.log(login)
+
+
+
 function App() {
+
+    const { store } = React.useContext(ReactReduxContext)
+    const routes = appRoutes(store.getState().auth.login)
+
     const classes = useStyles(theme);
     return (
         <div className={classes.root}>
@@ -52,7 +60,7 @@ function App() {
                 </Container>
             </footer>
         </div>
-    );
+    )
 }
 
 export default App

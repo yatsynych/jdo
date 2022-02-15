@@ -1,5 +1,8 @@
 
-import {CREATE_TODO, FETCH_TODOS} from '../actionsTypes'
+import {
+  CREATE_TODO,
+  FETCH_TODOS
+} from '../todo/todoActionsTypes'
 
 const initialState = {
   todos: [],

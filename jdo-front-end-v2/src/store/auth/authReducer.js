@@ -1,5 +1,8 @@
 
-import {SIGNUP_USER, SIGNIN_USER} from '../actionsTypes'
+import {
+    SIGNUP_USER,
+    SIGNIN_USER
+} from './authActionsTypes'
 
 const initialState = {
   login: false,

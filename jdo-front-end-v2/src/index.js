@@ -3,8 +3,8 @@ import {render} from 'react-dom'
 import {compose, createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
-import {rootReducer} from './redux/reducers/rootReducer'
-import {rootSagaWatcher} from './redux/rootSagaWatcher'
+import {rootReducer} from './store/rootReducer'
+import {rootSagaWatcher} from './store/rootSagaWatcher'
 import './index.css'
 import App from './App'
 
@@ -21,13 +21,11 @@ const store = createStore(
 
 saga.run(rootSagaWatcher)
 
-const rootElement = document.getElementById("root");
-
 render(
     <React.StrictMode>
         <Provider store={store}>
             <App />
         </Provider>
     </React.StrictMode>,
-    rootElement
+    document.getElementById("root")
 )

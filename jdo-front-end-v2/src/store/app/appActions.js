@@ -1,11 +1,9 @@
 import {
   SHOW_ALERT,
   HIDE_ALERT,
-  SIGNUP_USER,
-  SIGNIN_USER,
   SHOW_LOADER,
   HIDE_LOADER
-} from './actionsTypes'
+} from './appActionsTypes'
 
 export function showAlert(text) {
   return {
@@ -19,22 +17,6 @@ export function hideAlert() {
     type: HIDE_ALERT
   }
 }
-
-export function authSignUp(form) {
-  return {
-    type: SIGNUP_USER,
-    payload: form
-  }
-}
-
-
-export function authSignIn(form) {
-  return {
-    type: SIGNIN_USER,
-    payload: form
-  }
-}
-
 
 export function showLoader() {
   return {

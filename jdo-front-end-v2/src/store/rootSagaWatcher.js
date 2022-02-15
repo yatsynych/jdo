@@ -1,5 +1,5 @@
 import {takeEvery, put, call} from 'redux-saga/effects'
-import {SIGNIN_USER} from './actionsTypes'
+import {SIGNIN_USER} from './auth/authActionsTypes'
 
 
 export function* rootSagaWatcher() {

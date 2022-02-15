@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import { authSignUp } from '../../redux/actions'
+import { authSignUp } from '../../store/auth/authActions'
 
 class SingUp extends React.Component {
 
