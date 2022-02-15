@@ -1,4 +1,4 @@
-import React, { useSelector } from 'react'
+import React from 'react'
 import {BrowserRouter} from 'react-router-dom'
 import {appRoutes} from './routes'
 import { createTheme } from '@mui/material/styles'
@@ -28,10 +28,9 @@ const useStyles = makeStyles({
     },
   });
 
+//import { useSelector } from 'react'
 //const { login } = useSelector((state) => state.auth)
 //console.log(login)
-
-
 
 function App() {
 

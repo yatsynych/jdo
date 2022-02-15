@@ -2,7 +2,7 @@ import {takeEvery, put, call} from 'redux-saga/effects'
 import {SIGNIN_USER} from './auth/authActionsTypes'
 
 
-export function* rootSagaWatcher() {
+export default function* rootSaga() {
   yield takeEvery(SIGNIN_USER, sagaWorker)
   return
 }
