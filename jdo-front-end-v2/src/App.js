@@ -48,7 +48,6 @@ function App() {
                         jDO
                         </Link>{' '}
                         {new Date().getFullYear()}
-                        {'.'}
                     </Typography>
                 </Container>
             </footer>
