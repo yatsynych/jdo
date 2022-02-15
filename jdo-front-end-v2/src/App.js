@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import React, { useSelector } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from './routes'
+=======
+import React from 'react'
+import {BrowserRouter} from 'react-router-dom'
+import {appRoutes} from './routes'
+>>>>>>> 7c564421d7d2fcd5b9cf4b2385cd01cfca62e4f3
 import { createTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
