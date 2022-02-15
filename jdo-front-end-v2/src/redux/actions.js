@@ -16,11 +16,10 @@ export function hideAlert() {
 }
 
 export function authSignUp(form) {
-  return dispatch => {
-    dispatch({
-      type: SIGNUP_USER,
-      payload: form
-    })
+  console.log('authSignUp', form)
+  return {
+    type: SIGNUP_USER,
+    payload: form
   }
 }
 

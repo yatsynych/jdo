@@ -3,17 +3,15 @@ import {SIGNUP_USER, SIGNIN_USER} from '../actionsTypes'
 
 const initialState = {
   login: false,
-  form_singup: {email: '', password: '', firstName: '', lastName: ''},
-  form_singin: {email: '', password: ''}
+  form: {email: '', password: '', firstName: '', lastName: ''}
 }
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SIGNUP_USER:
-            console.log(action)
-            //return { ...state, form_singup: state.form_singup }
+            return { ...state, form: action.payload.form }
         case SIGNIN_USER:
-            return { ...state, form_singin: state.form_singin }
+            return { ...state, form: action.payload.form }
         default: return state
     }
 }

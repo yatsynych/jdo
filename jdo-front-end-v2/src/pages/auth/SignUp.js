@@ -3,35 +3,38 @@ import { connect } from 'react-redux'
 import { authSignUp } from '../../redux/actions'
 import { Link } from 'react-router-dom'
 import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 
 class SingUp extends React.Component {
 
   signUpHendler = event => {
+    event.preventDefault();
 
     const form = {
-      email: 'email',
-      password: 'password',
-      firstName: 'firstName',
-      lastName: 'lastName'
+      email: 'email_signUp',
+      password: 'password_signUp',
+      firstName: 'firstName_signUp',
+      lastName: 'lastName_signUp'
     }
 
-    this.props.authSignUp({form_singup: form})
+    this.props.authSignUp({form: form})
   }
 
   render() {
     return (
       <Container component="main" maxWidth="xs">
-        <Button
-                type="button"
-                color="warning"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={this.signUpHendler}
-              >
-                Sign Up
-              </Button>
+        <Box component="form" noValidate onSubmit={this.signUpHendler} sx={{ mt: 3 }}>
+          <Button
+            type="submit"
+            color="warning"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign Up
+          </Button>
+        </Box>
         <Link to="/">
           SignIn Form
         </Link>
