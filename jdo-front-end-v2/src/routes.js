@@ -4,7 +4,7 @@ import Todo from './pages/todo/Todo'
 import SingUp from './pages/auth/SignUp'
 import SingIn from './pages/auth/SignIn'
 
-export const appRoutes = isAuthenticated => {
+export const AppRoutes = ({ isAuthenticated }) => {
 
     if (isAuthenticated) {
         return (

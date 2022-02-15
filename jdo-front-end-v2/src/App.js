@@ -1,6 +1,6 @@
 import React, { useSelector } from 'react'
-import {BrowserRouter} from 'react-router-dom'
-import {appRoutes} from './routes'
+import { BrowserRouter } from 'react-router-dom'
+import { AppRoutes } from './routes'
 import { createTheme } from '@mui/material/styles'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
@@ -28,15 +28,9 @@ const useStyles = makeStyles({
     },
   });
 
-//const { login } = useSelector((state) => state.auth)
-//console.log(login)
+const App = () => {
 
-
-
-function App() {
-
-    const { store } = React.useContext(ReactReduxContext)
-    const routes = appRoutes(store.getState().auth.login)
+    const { isLoggedIn } = useSelector((state) => state.auth)
 
     const classes = useStyles(theme);
     return (
@@ -45,7 +39,7 @@ function App() {
             <Container component="main" className={classes.main} maxWidth="sm">
                 <Box className="logo" component="div" />
                 <BrowserRouter>
-                    {routes}
+                    <AppRoutes isAuthenticated={isLoggedIn} />
                 </BrowserRouter>
             </Container>
             <footer className={classes.footer}>

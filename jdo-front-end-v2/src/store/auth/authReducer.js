@@ -5,7 +5,7 @@ import {
 } from './authActionsTypes'
 
 const initialState = {
-  login: false,
+  isLoggedIn: false,
   form_singup: {email: '', password: '', firstName: '', lastName: ''},
   form_singin: {email: '', password: ''}
 }
