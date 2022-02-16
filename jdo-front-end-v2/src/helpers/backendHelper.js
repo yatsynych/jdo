@@ -1,10 +1,12 @@
-import { HttpRequest } from './apiHelper'
+import HttpRequest from './apiHelper'
 
-export const postSignInUser = (formSingIn) => {
+export const postSignInUser = (auth) => {
 
-  //HttpRequest(url, 'POST', formSingIn)
+  console.clear()
+  const response = HttpRequest('/api/auth/signin', 'POST', auth.formSingIn)
 
+  //console.log(response)
   //console.log(formSingIn)
   //throw new Error ('New error')
-  return true
+  return false
 }

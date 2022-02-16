@@ -54,8 +54,9 @@ class SingIn extends React.Component {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
                 name="email"
+                label="Email Address"
+                type="email"
                 autoComplete="email"
                 onChange={this.changeHandler}
               />
@@ -64,10 +65,10 @@ class SingIn extends React.Component {
               <TextField
                 required
                 fullWidth
+                id="password"
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
                 autoComplete="new-password"
                 onChange={this.changeHandler}
               />
