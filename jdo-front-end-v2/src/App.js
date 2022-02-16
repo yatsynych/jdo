@@ -1,4 +1,5 @@
-import React, { useSelector } from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from './routes'
 import { createTheme } from '@mui/material/styles'
@@ -8,7 +9,6 @@ import CssBaseline from '@mui/material/CssBaseline'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Link from '@mui/material/Link'
-import { ReactReduxContext } from 'react-redux'
 
 const theme = createTheme()
 
@@ -30,31 +30,31 @@ const useStyles = makeStyles({
 
 const App = () => {
 
-    const { isLoggedIn } = useSelector((state) => state.auth)
+  const { isLoggedIn } = useSelector((state) => state.auth)
 
-    const classes = useStyles(theme);
-    return (
-        <div className={classes.root}>
-            <CssBaseline />
-            <Container component="main" className={classes.main} maxWidth="sm">
-                <Box className="logo" component="div" />
-                <BrowserRouter>
-                    <AppRoutes isAuthenticated={isLoggedIn} />
-                </BrowserRouter>
-            </Container>
-            <footer className={classes.footer}>
-                <Container maxWidth="sm">
-                    <Typography variant="body2" align="center" color="textSecondary">
-                        {'Copyright © '}
-                        <Link color="inherit" href="https://github.com/yatsynych/jdo">
-                        jDO
-                        </Link>{' '}
-                        {new Date().getFullYear()}
-                    </Typography>
-                </Container>
-            </footer>
-        </div>
-    )
+  const classes = useStyles(theme);
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <Container component="main" className={classes.main} maxWidth="sm">
+        <Box className="logo" component="div" />
+        <BrowserRouter>
+          <AppRoutes isAuthenticated={isLoggedIn} />
+        </BrowserRouter>
+      </Container>
+      <footer className={classes.footer}>
+        <Container maxWidth="sm">
+          <Typography variant="body2" align="center" color="textSecondary">
+            {'Copyright © '}
+            <Link color="inherit" href="https://github.com/yatsynych/jdo">
+            jDO
+            </Link>{' '}
+            {new Date().getFullYear()}
+          </Typography>
+        </Container>
+      </footer>
+    </div>
+  )
 }
 
 export default App

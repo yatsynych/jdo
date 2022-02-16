@@ -17,7 +17,7 @@ class SingUp extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = this.props.form_singup
+    this.state = this.props.formSingUp
   }
 
   changeHandler = event => {
@@ -26,7 +26,7 @@ class SingUp extends React.Component {
 
   submitHendler = event => {
     event.preventDefault();
-    this.props.authSignUp({form_singup: this.state})
+    this.props.authSignUp({formSingUp: this.state})
   }
 
   render() {
@@ -124,7 +124,7 @@ const mapDispatchToProps = {
   }
   
   const mapStateToProps = state => ({
-    form_singup: state.auth.form_singup
+    formSingUp: state.auth.formSingUp
   })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingUp)

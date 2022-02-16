@@ -1,18 +1,26 @@
 import {
   SIGNUP_USER,
-  SIGNIN_USER
+  SIGNIN_USER,
+  LOGIN_USER_STATUS
 } from './authActionsTypes'
 
-export function authSignUp(form) {
+export function authSignUp(formSingUp) {
   return {
     type: SIGNUP_USER,
-    payload: form
+    payload: formSingUp
   }
 }
 
-export function authSignIn(form) {
+export function authSignIn(formSingIn) {
   return {
     type: SIGNIN_USER,
-    payload: form
+    payload: formSingIn
+  }
+}
+
+export function loginUserStatus(isLoggedIn) {
+  return {
+    type: LOGIN_USER_STATUS,
+    payload: {isLoggedIn}
   }
 }

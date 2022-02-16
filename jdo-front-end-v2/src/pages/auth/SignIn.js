@@ -17,7 +17,7 @@ class SingIn extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = this.props.form_singin
+    this.state = this.props.formSingIn
   }
 
   changeHandler = event => {
@@ -26,7 +26,7 @@ class SingIn extends React.Component {
 
   submitHendler = event => {
     event.preventDefault();
-    this.props.authSignIn({form_singin: this.state})
+    this.props.authSignIn({formSingIn: this.state})
   }
 
   render() {
@@ -97,11 +97,11 @@ class SingIn extends React.Component {
 }
 
 const mapDispatchToProps = {
-    authSignIn
-  }
+  authSignIn
+}
   
-  const mapStateToProps = state => ({
-    form: state.auth.form_singin
-  })
+const mapStateToProps = state => ({
+  form: state.auth.formSingIn
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingIn)
