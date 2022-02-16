@@ -17,6 +17,7 @@ export const authReducer = (state = initialState, action) => {
     case SIGNIN_USER:
       return { ...state, formSingIn: action.payload.formSingIn }
     case LOGIN_USER_STATUS:
+      console.log('LOGIN_USER_STATUS', action.payload)
       return { ...state, isLoggedIn: action.payload.isLoggedIn }
     default: return state
   }

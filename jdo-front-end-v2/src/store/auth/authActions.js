@@ -19,6 +19,7 @@ export function authSignIn(formSingIn) {
 }
 
 export function loginUserStatus(isLoggedIn) {
+  console.log('loginUserStatus', isLoggedIn)
   return {
     type: LOGIN_USER_STATUS,
     payload: {isLoggedIn}

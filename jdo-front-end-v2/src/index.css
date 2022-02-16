@@ -16,6 +16,14 @@ body {
 	width: 128px;
 	height: 56px;
 	background-size: 108px 36px;
+  float: left;
+}
+
+.logout {
+  display: block;
+  float: right;
+  height: 56px;
+  line-height: 56px;
 }
 
 .done {

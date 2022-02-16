@@ -97,11 +97,11 @@ class SingIn extends React.Component {
 }
 
 const mapDispatchToProps = {
-  authSignIn
-}
+    authSignIn
+  }
   
 const mapStateToProps = state => ({
-  form: state.auth.formSingIn
+  formSingIn: state.auth.formSingIn
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingIn)

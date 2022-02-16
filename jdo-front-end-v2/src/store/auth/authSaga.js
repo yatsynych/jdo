@@ -10,7 +10,7 @@ function* authRootSaga() {
 
 function* sagaSigUpUser({ payload: formSingUp }) {
   console.log('sagaSigUpUser', formSingUp)
-
+  yield true
 }
 
 function* sagaSigInUser({ payload: formSingIn })
@@ -18,6 +18,7 @@ function* sagaSigInUser({ payload: formSingIn })
   try {
     const response = yield call(postSignInUser, formSingIn)
     yield put(loginUserStatus(response))
+    //yield put({ type: 'LOGIN_USER_STATUS', 'formSingIn': true })
   } catch (error) {
     //yield put(showAlert(error.response))
     console.log('error')

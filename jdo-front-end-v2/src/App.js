@@ -38,9 +38,9 @@ const App = () => {
       <CssBaseline />
       <Container component="main" className={classes.main} maxWidth="sm">
         <Box className="logo" component="div" />
-        <BrowserRouter>
-          <AppRoutes isAuthenticated={isLoggedIn} />
-        </BrowserRouter>
+          <BrowserRouter>
+            <AppRoutes isAuthenticated={isLoggedIn} />
+          </BrowserRouter>
       </Container>
       <footer className={classes.footer}>
         <Container maxWidth="sm">
