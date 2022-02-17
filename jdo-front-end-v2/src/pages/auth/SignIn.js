@@ -51,12 +51,14 @@ class SingIn extends React.Component {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                autoFocus
                 required
                 fullWidth
                 id="email"
                 name="email"
-                label="Email Address"
                 type="email"
+                value={this.state.email}
+                label="Email Address"
                 autoComplete="email"
                 onChange={this.changeHandler}
               />
@@ -67,8 +69,9 @@ class SingIn extends React.Component {
                 fullWidth
                 id="password"
                 name="password"
-                label="Password"
                 type="password"
+                value={this.state.password}
+                label="Password"
                 autoComplete="new-password"
                 onChange={this.changeHandler}
               />

@@ -21,33 +21,30 @@ router.post(
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({
-          error: true,
-          errors: errors.array(),
-          message: 'Incorect registration data'
+        return res.status(200).json({
+          message: 'Incorect registration data',
+          errors: errors.array()
         })
       }
 
-      const {email, password, firstName, lastName} = reg.body
+      const {email, password, firstName, lastName} = req.body
 
       const candidate = await User.findOne({ email })
 
-            if (candidate) {
-        return res.status(500).json({
-          error: true,
+      if (candidate) {
+        return res.status(406).json({
           message: "User exists"
         })
       }
 
       const hashedPassword = await bcrypt.hash(password, 12)
-      const user = new User({
+
+      User.create({
         email,
         password: hashedPassword,
         firstName,
         lastName,
-       })
-
-      await user.save()
+      }).then(user => res.json(user))
 
       res.status(201).json({
         error: true,
@@ -55,11 +52,9 @@ router.post(
       })
 
     } catch(e) {
+      console.log(e)
       res.setHeader('Access-Control-Allow-Origin', '*');
-      res.status(500).json({
-        error: true,
-        message: "Error. Try!"
-      })
+      res.status(500).json({message: "Internal Error."})
     }
   }
 
@@ -69,7 +64,7 @@ router.post(
   '/signin',
   [
     check('email', "Enter valid email").isEmail().normalizeEmail(),
-    check('password', "Enter password").exists()
+    check('password', "Enter password").exists().isLength({min: 6})
   ],
   async (req, res) => {
 
@@ -78,7 +73,10 @@ router.post(
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        return res.status(200).json({
+          message: 'Incorect email or password',
+          errors: errors.array()
+        })
       }
 
       // Get all users List
@@ -92,35 +90,25 @@ router.post(
       })
       */
 
-      //User.deleteOne({ _id: entry._id })
+      //const result = await User.deleteOne({ _id: '620d6b103e7d103e8e01d3b6' })
+      //const result = await User.deleteOne({ email: 'test@test.com' })
+
+      //console.log(result)
 
       const {email, password} = req.body
 
-      const user = await User.findOne({ email })
+      const user = await User.findOne({ email, password })
 
       if (!user) {
-        return res.status(404).json({ message: 'Incorect email or password'}) // User not found
+        return res.status(406).
+          json({ message: 'Incorect email or password'})
       }
 
-      /*
-
-test@test.com
-123454
-
-      */
-
-      /*
-      User.create({
-        email: email,
-        password: password,
-      }).then(user => res.json(user));
-      */
-
-      //res.json({ token, userId: user.id})
       res.status(200).json({ message: 'Ok', 'user': user})
 
     } catch(e) {
-      res.status(500).json({message: "Error. Try."})
+      console.log(e)
+      res.status(500).json({message: "Error. Try.", 'error': e})
     }
 
   },

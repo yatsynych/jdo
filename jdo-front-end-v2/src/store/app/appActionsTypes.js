@@ -1,4 +1,4 @@
-export const SHOW_ALERT = 'APP/SHOW_ALERT'
-export const HIDE_ALERT = 'APP/HIDE_ALERT'
-export const SHOW_LOADER = 'APP/SHOW_LOADER'
-export const HIDE_LOADER = 'APP/HIDE_LOADER'
+export const SHOW_ALERT = 'app/SHOW_ALERT'
+export const HIDE_ALERT = 'app/HIDE_ALERT'
+export const SHOW_LOADER = 'app/SHOW_LOADER'
+export const HIDE_LOADER = 'app/HIDE_LOADER'

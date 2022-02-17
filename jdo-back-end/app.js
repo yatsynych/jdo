@@ -16,14 +16,10 @@ async function start() {
     try {
         await mongoose.connect(config.get('mongodb.uri'), {
             useNewUrlParser: true,
-            useUnifiedTopology: true,
-            //useCreateIndex: true
+            useUnifiedTopology: true
         })
         app.listen(PORT, () => {
-            //console.clear()
-            const date = new Date().toISOString().
-                replace(/T/, ' ').
-                replace(/\..+/, '')
+            const date = new Date()
             console.log(`${date} jDO Server has been started on port ${PORT}`)
         })
     } catch(e) {
@@ -35,10 +31,10 @@ async function start() {
 start()
 
 const todos = [
-    {id: 1, complited: false, title: 'Test todo item 1'},
-    {id: 2, complited: false, title: 'Test todo item 2'},
-    {id: 3, complited: false, title: 'Test todo item 3'},
-    {id: 4, complited: false, title: 'Test todo item 4'}
+    {_id: 1, complited: false, title: 'Test todo item 1'},
+    {_id: 2, complited: false, title: 'Test todo item 2'},
+    {_id: 3, complited: false, title: 'Test todo item 3'},
+    {_id: 4, complited: false, title: 'Test todo item 4'}
 ]
 
 app.get('/todo/', (req, res) => {

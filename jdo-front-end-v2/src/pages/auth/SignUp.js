@@ -51,13 +51,15 @@ class SingUp extends React.Component {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                  autoFocus
                   required
                   fullWidth
                   id="firstName"
+                  name="firstName"
+                  type="text"
+                  value={this.state.firstName}
                   label="First Name"
-                  autoFocus
+                  autoComplete="given-name"
                   onChange={this.changeHandler}
                 />
               </Grid>
@@ -66,8 +68,10 @@ class SingUp extends React.Component {
                   required
                   fullWidth
                   id="lastName"
-                  label="Last Name"
                   name="lastName"
+                  type="text"
+                  value={this.state.lastName}
+                  label="Last Name"
                   autoComplete="family-name"
                   onChange={this.changeHandler}
                 />
@@ -77,8 +81,10 @@ class SingUp extends React.Component {
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
                   name="email"
+                  type="email"
+                  value={this.state.email}
+                  label="Email Address"
                   autoComplete="email"
                   onChange={this.changeHandler}
                 />
@@ -87,10 +93,11 @@ class SingUp extends React.Component {
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
                   id="password"
+                  name="password"
+                  type="password"
+                  value={this.state.password}
+                  label="Password"
                   autoComplete="new-password"
                   onChange={this.changeHandler}
                 />

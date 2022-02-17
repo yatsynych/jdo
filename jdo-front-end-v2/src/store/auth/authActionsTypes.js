@@ -1,3 +1,3 @@
-export const SIGNUP_USER = 'AUTH/SIGNUP_USER'
-export const SIGNIN_USER = 'AUTH/SIGNIN_USER'
-export const LOGIN_USER_STATUS = 'AUTH/LOGIN_USER_STATUS'
+export const SIGNUP_USER = 'auth/SIGNUP_USER'
+export const SIGNIN_USER = 'auth/SIGNIN_USER'
+export const LOGIN_USER_STATUS = 'auth/LOGIN_USER_STATUS'

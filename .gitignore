@@ -5,6 +5,9 @@
 # Docker
 .dockerignore
 
+# .bak
+*.bak
+
 ### macOS ###
 # General
 .DS_Store

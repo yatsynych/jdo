@@ -1,7 +1,7 @@
 import {takeLatest, put, call} from 'redux-saga/effects'
-import {SIGNIN_USER, SIGNUP_USER} from './authActionsTypes'
+import {SIGNIN_USER, SIGNUP_USER/*, LOGIN_USER_STATUS*/} from './authActionsTypes'
 import {loginUserStatus} from './authActions'
-import {postSignInUser} from '../../helpers/backendHelper'
+import {PostSignUpUser, PostSignInUser} from '../../helpers/backendHelper'
 
 function* authRootSaga() {
   yield takeLatest(SIGNUP_USER, sagaSigUpUser)
@@ -9,19 +9,23 @@ function* authRootSaga() {
 }
 
 function* sagaSigUpUser({ payload: formSingUp }) {
-  console.log('sagaSigUpUser', formSingUp)
-  yield true
+  try {
+    const response = yield call(PostSignUpUser, formSingUp)
+  } catch (error) {
+    console.log('sagaSigUpUser - error')
+  }
 }
 
 function* sagaSigInUser({ payload: formSingIn })
 {
   try {
-    const response = yield call(postSignInUser, formSingIn)
-    yield put(loginUserStatus(response))
-    //yield put({ type: 'LOGIN_USER_STATUS', 'formSingIn': true })
+    const response = yield call(PostSignInUser, formSingIn)
+    console.log('sagaSigInUser', response)
+    //yield put(loginUserStatus(response))
+    //yield put({ type: LOGIN_USER_STATUS, payload: { isLoggedIn: true } })
   } catch (error) {
     //yield put(showAlert(error.response))
-    console.log('error')
+    console.log('sagaSigInUser - error')
   }
 }
 
