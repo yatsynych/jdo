@@ -21,7 +21,7 @@ function* sagaSigInUser({ payload: formSingIn })
   try {
     const response = yield call(PostSignInUser, formSingIn)
     console.log('sagaSigInUser', response)
-    //yield put(loginUserStatus(response))
+    yield put(loginUserStatus(response))
     //yield put({ type: LOGIN_USER_STATUS, payload: { isLoggedIn: true } })
   } catch (error) {
     //yield put(showAlert(error.response))

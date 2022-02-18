@@ -2,16 +2,17 @@ import HttpRequest from './apiHelper'
 import {useDispatch} from 'react-redux'
 import {loginUserStatus} from '../store/auth/authActions'
 
-export const PostSignInUser = (auth) => {
+export async function PostSignInUser(auth) {
 
   console.log('PostSignInUser')
+  
   //const dispatch = useDispatch()
-
-  const request = HttpRequest('/api/auth/signin', 'POST', auth.formSingIn)
+  const request = await HttpRequest('/api/auth/signin', 'POST', auth.formSingIn)
 
   request.then(async response => {
     console.log('response - ', response)
     if (response.error) {
+
       //dispatch(loginUserStatus(false))
       return false
     } else {
@@ -25,6 +26,7 @@ export const PostSignInUser = (auth) => {
   })
 
   return true
+
 }
 
 export const PostSignUpUser = (auth) => {
