@@ -12,21 +12,37 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { authSignIn } from '../../store/auth/authActions'
+import { Alert } from '../../componets/Alert'
 
 class SingIn extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = this.props.formSingIn
+    this.state = {
+      formSingIn: this.props.formSingIn,
+      formAlert: this.props.formAlert,
+      showAlert: false
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.formAlert.text != this.props.formAlert.text && this.props.formAlert.text) {
+      this.setState({showAlert: true})
+    }
   }
 
   changeHandler = event => {
-    this.setState({ ...this.state, [event.target.name]: event.target.value })
+    this.setState({
+      formSingIn: {
+        ...this.state.formSingIn,
+        [event.target.name]: event.target.value
+      }
+    })
   }
 
   submitHendler = event => {
-    event.preventDefault();
-    this.props.authSignIn({formSingIn: this.state})
+    event.preventDefault()
+    this.props.authSignIn({formSingIn: this.state.formSingIn})
   }
 
   render() {
@@ -86,9 +102,14 @@ class SingIn extends React.Component {
           >
             Sign In
           </Button>
+          { this.state.showAlert &&
+            <Alert
+              text={this.props.formAlert.text}
+              severity={this.props.formAlert.severity}
+              variant={this.props.formAlert.variant} /> }
           <Grid container justifyContent="center">
             <Grid item>
-              <Link to="/auth/singup">
+              <Link to="/auth/singup" >
                 No have an account? Sign Up
               </Link>
             </Grid>
@@ -101,11 +122,12 @@ class SingIn extends React.Component {
 }
 
 const mapDispatchToProps = {
-    authSignIn
-  }
+  authSignIn
+}
   
 const mapStateToProps = state => ({
-  formSingIn: state.auth.formSingIn
+  formSingIn: state.auth.formSingIn,
+  formAlert: state.auth.formAlert
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingIn)

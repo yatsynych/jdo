@@ -17,11 +17,13 @@ router.post(
   async (req, res) => {
 
     try {     
-            
+
+      const result = await User.deleteOne({ email: 'test@test.com' })
+
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
-        return res.status(200).json({
+        return res.status(400).json({
           message: 'Incorect registration data',
           errors: errors.array()
         })
@@ -44,17 +46,14 @@ router.post(
         password: hashedPassword,
         firstName,
         lastName,
-      }).then(user => res.json(user))
-
-      res.status(201).json({
-        error: true,
+      }).then(user => res.status(201).json({
         message: "User created"
-      })
+      }))
 
     } catch(e) {
       console.log(e)
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.status(500).json({message: "Internal Error."})
+      //res.setHeader('Access-Control-Allow-Origin', '*');
+      return res.status(500).json({message: "Internal Error."})
     }
   }
 
@@ -73,14 +72,15 @@ router.post(
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return res.status(200).json({
+        return res.status(400).json({
           message: 'Incorect email or password',
-          errors: errors.array()
+          //errors: errors.array()
         })
       }
 
       // Get all users List
-      /*
+
+/*
       User.find({}, function(err, users) {
         var userMap = {}
         users.forEach(function(user) {
@@ -88,23 +88,33 @@ router.post(
         })
         res.send(userMap); 
       })
-      */
+*/    
 
-      //const result = await User.deleteOne({ _id: '620d6b103e7d103e8e01d3b6' })
-      //const result = await User.deleteOne({ email: 'test@test.com' })
+      
 
       //console.log(result)
 
       const {email, password} = req.body
 
-      const user = await User.findOne({ email, password })
+      const hashedPassword = await bcrypt.hash(password, 12)
+
+      const user = await User.findOne({ email, password: hashedPassword })
 
       if (!user) {
         return res.status(406).
-          json({ message: 'Incorect email or password'})
+          json({
+            message: 'Incorect email or password'
+          })
       }
 
-      res.status(200).json({ message: 'Ok', 'user': user})
+      res.status(200).json({
+        message: 'Ok',
+        'user': {
+          email: user.email,
+          firstName: user.firstName,
+          lastName: user.lastName
+        }
+      })
 
     } catch(e) {
       console.log(e)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Container from '@mui/material/Container'
@@ -12,21 +12,51 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { authSignUp } from '../../store/auth/authActions'
+import { Alert } from '../../componets/Alert'
+
+/*
+formError
+
+const [ isModalActive, showModal ] = useState(false)
+
+useEffect(() => {
+  if (formError) showModal(true)
+}, [ formError ])
+
+*/
+
+//const [ isModalActive, showAlert ] = useState(false)
 
 class SingUp extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = this.props.formSingUp
+    this.state = {
+      formSingUp: this.props.formSingUp,
+      formAlert: this.props.formAlert,
+      showAlert: false
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.formAlert.text != this.props.formAlert.text && this.props.formAlert.text) {
+      this.setState({showAlert: true})
+    }
   }
 
   changeHandler = event => {
-    this.setState({ ...this.state, [event.target.name]: event.target.value })
+    this.setState({
+      ...this.state,
+      formSingUp: {
+        ...this.state.formSingUp,
+        [event.target.name]: event.target.value
+      }
+    })
   }
 
   submitHendler = event => {
     event.preventDefault();
-    this.props.authSignUp({formSingUp: this.state})
+    this.props.authSignUp({formSingUp: this.state.formSingUp})
   }
 
   render() {
@@ -112,6 +142,11 @@ class SingUp extends React.Component {
             >
               Sign Up
             </Button>
+            { this.state.showAlert &&
+            <Alert
+              text={this.props.formAlert.text}
+              severity={this.props.formAlert.severity}
+              variant={this.props.formAlert.variant} /> }
             <Grid container justifyContent="center">
               <Grid item>
                 <Link to="/">
@@ -131,7 +166,8 @@ const mapDispatchToProps = {
   }
   
   const mapStateToProps = state => ({
-    formSingUp: state.auth.formSingUp
+    formSingUp: state.auth.formSingUp,
+    formAlert: state.auth.formAlert
   })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingUp)
