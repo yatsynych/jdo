@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import { authSignIn } from '../../store/auth/authActions'
+import { signInUser } from '../../store/auth/authActions'
 import { Alert } from '../../componets/Alert'
 
 class SingIn extends React.Component {
@@ -42,7 +42,7 @@ class SingIn extends React.Component {
 
   submitHendler = event => {
     event.preventDefault()
-    this.props.authSignIn({formSingIn: this.state.formSingIn})
+    this.props.signInUser({formSingIn: this.state.formSingIn})
   }
 
   render() {
@@ -122,7 +122,7 @@ class SingIn extends React.Component {
 }
 
 const mapDispatchToProps = {
-  authSignIn
+  signInUser
 }
   
 const mapStateToProps = state => ({

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Link } from '@mui/material'
 import { useDispatch } from 'react-redux'
-import { loginError } from '../store/auth/authActions'
+import { signInError } from '../store/auth/authActions'
 
 export const Logout = () => {
 
@@ -13,7 +13,7 @@ export const Logout = () => {
         component="button"
         variant="body1"
         onClick={() => {
-          dispatch(loginError({text: '', type: ''}))
+          dispatch(signInError({text: '', type: ''}))
         }}
       >
         Log Out

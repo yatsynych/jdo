@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
-import { authSignUp } from '../../store/auth/authActions'
+import { signUpUser } from '../../store/auth/authActions'
 import { Alert } from '../../componets/Alert'
 
 /*
@@ -56,7 +56,7 @@ class SingUp extends React.Component {
 
   submitHendler = event => {
     event.preventDefault();
-    this.props.authSignUp({formSingUp: this.state.formSingUp})
+    this.props.signUpUser({formSingUp: this.state.formSingUp})
   }
 
   render() {
@@ -162,12 +162,12 @@ class SingUp extends React.Component {
 }
 
 const mapDispatchToProps = {
-    authSignUp
-  }
+  signUpUser
+}
   
-  const mapStateToProps = state => ({
-    formSingUp: state.auth.formSingUp,
-    formAlert: state.auth.formAlert
-  })
+const mapStateToProps = state => ({
+  formSingUp: state.auth.formSingUp,
+  formAlert: state.auth.formAlert
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingUp)

@@ -1,49 +1,50 @@
 import {
   SIGNUP_USER,
-  SIGNIN_USER,
-  LOGIN_USER_STATUS,
   SIGNUP_USER_SUCCESS,
-  SIGNUP_USER_ERROR
+  SIGNUP_USER_ERROR,
+  SIGNIN_USER,
+  SIGNIN_USER_SUCCESS,
+  SIGNIN_USER_ERROR
 } from './authActionsTypes'
 
-export function authSignUp(formSingUp) {
+export function signUpUser(formSingUp) {
   return {
     type: SIGNUP_USER,
     payload: formSingUp
   }
 }
 
-export function userCreateSuccess(formAlert) {
+export function signUpUserSuccess(formAlert) {
   return {
     type: SIGNUP_USER_SUCCESS,
     payload: {formAlert}
   }
 }
 
-export function userCreateError(formAlert) {
+export function signUpUserError(formAlert) {
   return {
     type: SIGNUP_USER_ERROR,
     payload: {formAlert}
   }
 }
 
-export function authSignIn(formSingIn) {
+export function signInUser(formSingIn) {
   return {
     type: SIGNIN_USER,
     payload: formSingIn
   }
 }
 
-export function loginSucces(formAlert) {
+export function signInSuccess(message) {
   return {
-    type: LOGIN_USER_STATUS,
-    payload: {isLoggedIn: true, formAlert}
+    type: SIGNIN_USER_SUCCESS,
+    payload: {message}
   }
 }
 
-export function loginError(formAlert) {
+export function signInError(formAlert) {
   return {
-    type: LOGIN_USER_STATUS,
-    payload: {isLoggedIn: false, formAlert}
+    type: SIGNIN_USER_ERROR,
+    payload: {formAlert}
   }
 }

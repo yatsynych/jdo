@@ -1,5 +1,6 @@
 export const SIGNUP_USER = 'auth/SIGNUP_USER'
-export const SIGNIN_USER = 'auth/SIGNIN_USER'
-export const LOGIN_USER_STATUS = 'auth/LOGIN_USER_STATUS'
 export const SIGNUP_USER_SUCCESS = 'auth/SIGNUP_USER_SUCCESS'
 export const SIGNUP_USER_ERROR = 'auth/SIGNUP_USER_ERROR'
+export const SIGNIN_USER = 'auth/SIGNIN_USER'
+export const SIGNIN_USER_SUCCESS = 'auth/SIGNIN_USER_SUCCESS'
+export const SIGNIN_USER_ERROR = 'auth/SIGNIN_USER_ERROR'

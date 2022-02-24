@@ -1,9 +1,10 @@
 import {
   SIGNUP_USER,
-  SIGNIN_USER,
-  LOGIN_USER_STATUS,
   SIGNUP_USER_SUCCESS,
   SIGNUP_USER_ERROR,
+  SIGNIN_USER,
+  SIGNIN_USER_SUCCESS,
+  SIGNIN_USER_ERROR
 } from './authActionsTypes'
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
 }
 
 export const authReducer = (state = initialState, action) => {
+
   switch (action.type) {
 
     case SIGNUP_USER:
@@ -23,7 +25,6 @@ export const authReducer = (state = initialState, action) => {
       }
 
     case SIGNUP_USER_SUCCESS:
-      console.log(action.payload.formAlert)
       return {
         ...state,
         formAlert: {text: action.payload.formAlert.message, severity: 'success'}
@@ -41,13 +42,21 @@ export const authReducer = (state = initialState, action) => {
         formSingIn: action.payload.formSingIn
       }
 
-    case LOGIN_USER_STATUS:
+    case SIGNIN_USER_SUCCESS:
       return {
         ...state,
-        isLoggedIn: action.payload.isLoggedIn,
-        formAlert: action.payload.formAlert
+        isLoggedIn: true,
+        formAlert: {text: action.payload.message, severity: 'success'}
       }
+
+      case SIGNIN_USER_ERROR:
+        return {
+          ...state,
+          isLoggedIn: false,
+          formAlert: action.payload.formAlert
+        }
 
     default: return state
   }
+
 }

@@ -18,14 +18,14 @@ router.post(
 
     try {     
 
-      const result = await User.deleteOne({ email: 'test@test.com' })
+      //const result = await User.deleteOne({ email: 'test@test.com' })
 
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
         return res.status(400).json({
-          message: 'Incorect registration data',
-          errors: errors.array()
+          message: 'Incorect registration data'
+          //,errors: errors.array()
         })
       }
 
@@ -73,14 +73,15 @@ router.post(
 
       if (!errors.isEmpty()) {
         return res.status(400).json({
-          message: 'Incorect email or password',
-          //errors: errors.array()
+          message: 'Incorect email or password'
+          //,errors: errors.array()
         })
       }
 
-      // Get all users List
+     
 
 /*
+      // Get all users List
       User.find({}, function(err, users) {
         var userMap = {}
         users.forEach(function(user) {
@@ -90,26 +91,31 @@ router.post(
       })
 */    
 
-      
-
-      //console.log(result)
-
       const {email, password} = req.body
 
       const hashedPassword = await bcrypt.hash(password, 12)
 
-      const user = await User.findOne({ email, password: hashedPassword })
+      const user = await User.findOne({ email })
 
-      if (!user) {
+      const isMatch = await bcrypt.compare(password, user.password)
+
+      if (!isMatch) {
         return res.status(406).
           json({
             message: 'Incorect email or password'
           })
       }
 
+      const token = jwt.sign(
+        { userId: user.id },
+        config.get('jwtSecret'),
+        { expiresIn: '4h' }
+      )
+
       res.status(200).json({
-        message: 'Ok',
+        message: `Welcome ${user.firstName} ${user.lastName}`,
         'user': {
+          token: token,
           email: user.email,
           firstName: user.firstName,
           lastName: user.lastName
